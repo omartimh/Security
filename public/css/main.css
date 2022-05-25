@@ -1,0 +1,74 @@
+.container {
+    margin: auto;
+    max-width: 1800px;
+    overflow-x: hidden;
+} .content {
+    height: 100vh;
+    background: #ECEFF1;
+    display: grid;
+    place-items: center;
+} .content form {
+    padding: 2.75em 2.5em 2.5em 2.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    background: #FFF;
+    border: 1px solid #CCC;
+} .content form span {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+} .content form span label {
+    padding: 0 0.1em;
+    position: absolute;
+    left: 0.5em;
+    top: -0.7em;
+    width: fit-content;
+    font-weight: 300;
+    cursor: pointer;
+    color: #424242;
+    background: #FFF;
+} .content form span input {
+    padding: 0.7em 1em 0.3em 1em;
+    width: 300px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    transition: 0.1s ease-out;
+} .content form span input:focus {
+    cursor: text;
+    box-shadow: 0 0 3px 1px #2196F3;
+    transition: ease-in 0.1s;
+} .content form button {
+    margin-left: 0.5em;
+    padding: 0.5em 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    color: #FFF;
+    background: #2196F3;
+    transition: 0.1s ease-out;
+} .content form button:hover {
+    background: #1976D2;
+    transition: ease-in 0.1s;
+}
+
+.header {
+
+}
+
+footer {
+    padding: 1em 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    color: #FFF;
+    background: #212121;
+    border-top: 1px solid #CCC;
+} footer p {
+    font-weight: 300;
+}
