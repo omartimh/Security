@@ -5,10 +5,12 @@
     if (isset($_REQUEST)) {
         if (isset($_REQUEST['submit'])) {
             $message = $_REQUEST['message'];
-            $p = random_int(2, 99);
-            $q = random_int(2, 99);
+            
+            $p = findRandomPrime();
+            $q = findRandomPrime();
             $xa = random_int(2, 9);
             $xb = random_int(2, 9);
+
             $dh = new DiffieHellman($p, $q, $xa, $xb);
             $keys = $dh->get_keys();
             echo '<h3>P & Q Definition - Randomly Generated</h3>';
@@ -23,6 +25,12 @@
             echo '<h3>Same Key for Alice & Bob - If both keys are the same, then it is CORRECT!</h3>';
             echo 'Alice Secret Key From Bob: (Bob Public Key ^ Alice Private Key) Mod Q = (' . $keys[0] . ' ^ ' . $xa . ') Mod ' . $q . ' = ' . $keys[2] . '<br/>';
             echo 'Bob Secret Key From Alice: (Alice Public Key ^ Bob Private Key) Mod Q = (' . $keys[1] . ' ^ ' . $xa . ') Mod ' . $q . ' = ' . $keys[3] . '<br/>';
+            echo '<br/>';
+            echo 'Max Int (64-bit): ' . PHP_INT_MAX;
+            echo '<br/>';
+
+            $digits = 18;
+            echo floatval(rand(pow(10, $digits-1), pow(10.0, $digits)));
         }
     }
 ?>

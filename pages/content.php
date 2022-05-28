@@ -4,6 +4,6 @@
             <label for="message">Message</label>
             <input id="message" name="message" type="text" autocomplete="off" required>
         </span>
-        <button type="submit">Send</button>
+        <button id="btn"  type="submit">Send</button>
     </form>
 </div>

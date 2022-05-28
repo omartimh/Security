@@ -1,4 +1,27 @@
 <?php
+
+    function findRandomPrime() {
+        $min = 2;
+        $max = 212; // 2147483647
+        for ($i = rand($min, $max); $i < $max; $i++) {
+            if (isPrime($i)) {
+                return $i;
+            }
+        }
+    }
+
+    function isPrime($num){
+        if($num % 2 == 0) {
+            return false;
+        }
+            
+        for($i = 3; $i <= ceil(sqrt($num)); $i = $i + 2) {
+            if($num % $i == 0)
+                return false;
+        }
+        return true;
+    }
+
     class DiffieHellman {
 
         # Prime Numbers - Defined
@@ -24,12 +47,16 @@
             $this->_xb = $xb;
             
             # Calculate Public Keys
-            $this->_ya = ($this->_p ** $this->_xa) % $this->_q;
-            $this->_yb = ($this->_p ** $this->_xb) % $this->_q;
+            $this->_ya = abs(($this->_p ** $this->_xa) % $this->_q);
+            $this->_yb = abs(($this->_p ** $this->_xb) % $this->_q);
+            # $this->_ya = bcpowmod($this->_p, $this->_xa, $this->_q);
+            # $this->_yb = bcpowmod($this->_p, $this->_xb, $this->_q);
             
             # Calculate Same Keys
-            $this->_a = ($this->_yb ** $this->_xa) % $this->_q;
-            $this->_b = ($this->_ya ** $this->_xb) % $this->_q;
+            $this->_a = abs(($this->_yb ** $this->_xa) % $this->_q);
+            $this->_b = abs(($this->_ya ** $this->_xb) % $this->_q);
+            # $this->_ya = bcpowmod($this->_yb, $this->_xa, $this->_q);
+            # $this->_ya = bcpowmod($this->_ya, $this->_xb, $this->_q);
 
         }
 
