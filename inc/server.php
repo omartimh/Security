@@ -5,32 +5,34 @@
     if (isset($_REQUEST)) {
         if (isset($_REQUEST['submit'])) {
             $message = $_REQUEST['message'];
+        } else if (isset($_REQUEST['test'])) {
+            $plain_text = '1010 0101';
+            $key = '0010010111';
+            $p10 = '3 5 2 7 4 10 1 9 8 6';
+            $p8 = '6 3 7 4 8 5 1 0';
+            $p4 = '2 4 3 1';
+            $ip = '2 6 3 1 4 8 5 7';
+            $ep = '4 1 2 3 2 3 4 1';
             
-            $p = findRandomPrime();
-            $q = findRandomPrime();
-            $xa = random_int(2, 9);
-            $xb = random_int(2, 9);
+            # $k = '0 0 1 0 0 1 0 1 1 1';
+            
+            $plain_text = explode(' ', $plain_text);
+            $p10 = explode(' ', $p10);
+            $p8 = explode(' ', $p8);
+            $p4 = explode(' ', $p4);
+            $ip = explode(' ', $ip);
+            $ep = explode(' ', $ep);
 
-            $dh = new DiffieHellman($p, $q, $xa, $xb);
-            $keys = $dh->get_keys();
-            echo '<h3>P & Q Definition - Randomly Generated</h3>';
-            echo 'P: ' . $p . '<br/>';
-            echo 'Q: ' . $q . '<br/>';
-            echo '<h3>Private Keys Definition for Alice & Bob - Randomly Generated</h3>';
-            echo 'Alice Private Key : ' . $xa . '<br/>';
-            echo 'Bob Private Key : ' . $xb . '<br/>';
-            echo '<h3>Public Keys Calculation for Alice & Bob</h3>';
-            echo 'Alice Public Key : (P ^ Alice Private Key) Mod Q = (' . $p . ' ^ ' . $xa . ') Mod ' . $q . ' = ' . $keys[0] . '<br/>';
-            echo 'Bob Public Key : (P ^ Bob Private Key) Mod Q = (' . $p . ' ^ ' . $xb . ') Mod ' . $q . ' = ' . $keys[1] . '<br/>';
-            echo '<h3>Same Key for Alice & Bob - If both keys are the same, then it is CORRECT!</h3>';
-            echo 'Alice Secret Key From Bob: (Bob Public Key ^ Alice Private Key) Mod Q = (' . $keys[0] . ' ^ ' . $xa . ') Mod ' . $q . ' = ' . $keys[2] . '<br/>';
-            echo 'Bob Secret Key From Alice: (Alice Public Key ^ Bob Private Key) Mod Q = (' . $keys[1] . ' ^ ' . $xa . ') Mod ' . $q . ' = ' . $keys[3] . '<br/>';
-            echo '<br/>';
-            echo 'Max Int (64-bit): ' . PHP_INT_MAX;
-            echo '<br/>';
+            $key = str_split($key);
+            $key_length = sizeof($key);
+            $k = array_slice($key, 0, $key_length);
+            $k1 = array_slice($key, 0, $key_length / 2);
+            $k2 = array_slice($key, $key_length / 2, $key_length);
 
-            $digits = 18;
-            echo floatval(rand(pow(10, $digits-1), pow(10.0, $digits)));
+            $des = new Des($plain_text, $key, $p10, $p8, $p4, $ip, $ep);
+            # $des->get_keys($k1, $k2);
+            $result = $des->premutation($p10, $k);
+            print_r($result);
         }
     }
 ?>
