@@ -72,3 +72,18 @@ footer {
 } footer p {
     font-weight: 300;
 }
+
+#btn {
+    padding: 0.5em 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    color: #FFF;
+    background: #2196F3;
+    transition: 0.1s ease-out;
+} #btn:hover {
+    background: #1976D2;
+    transition: ease-in 0.1s;
+}
